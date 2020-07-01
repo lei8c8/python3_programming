@@ -1,4 +1,3 @@
-
 punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", '#', '@']
 # list of positive words to use
 positive_words = []
@@ -63,13 +62,13 @@ def generate_csv_content():
         for line in fd:
             if i > 0:
                 contents = line.split(',')
-                text, retweets, replies = contents[0], contents[1], contents[2]
+                text, retweets, replies = contents[0], contents[1], contents[2].strip()
                 positive_score = get_pos(line)
                 negative_score = get_neg(line)
                 net_score = positive_score - negative_score
                 result.append([retweets, replies, positive_score, negative_score, net_score])
             else:
-                result.append(["Number of Retweets", "Number of Replies", "Positive Score", "Negative Score", "Net Score"])
+                result.append(["Number of Retweets", " Number of Replies", " Positive Score", " Negative Score", " Net Score"])
             i += 1
     return result
 
@@ -81,7 +80,7 @@ def write_csv(result):
     with open("resulting_data.csv", "w") as fd:
         for line in result:
             line = [str(x) for x  in line]
-            line_content = ','.join(line)
+            line_content = ','.join(line) + '\n'
             fd.write(line_content)
         fd.close()
 
