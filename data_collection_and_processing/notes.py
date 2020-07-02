@@ -19,3 +19,5 @@ kval_pairs = {'rel_rhy': 'funny'}
 page2 = requests.get("https://api.datamuse.com/words", params=kval_pairs)
 print(page2.text[:150])
 print(page.url)
+
+res = requests_with_caching.get
